@@ -1,0 +1,5 @@
+.tmp
+*.swp
+db.config.php
+*.mwb.bak
+database.php
