@@ -102,6 +102,32 @@ class Category extends CI_Controller{
 
 
 
+    function modify(){
+
+        if(!isset($_POST["id"])||!isset($_POST["name"])){
+
+            //process a request with get method
+            $data["host_url"]=$this->host_url;
+            $this->load->view(
+                "category/modifyview",
+                $data
+            );
+
+        }else{
+            //process a request with post method
+
+            $id=$_POST["id"];
+            $name=$_POST["name"];
+            $ret=$this->categorymodel->modify($id,$name);
+            if($ret){
+                echo "succeed";
+            }else{
+                echo "false";
+            }
+        }
+    }
+
+
 
 
 

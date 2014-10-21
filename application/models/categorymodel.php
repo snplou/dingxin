@@ -71,6 +71,24 @@ class CategoryModel extends CI_Model{
 
 
 
+    function modify($id,$name){
+        if(!isset($id)||!isset($name)){
+            echo "parameters too less:id";
+            return false;
+        }else{
+            $data=array(
+                "cat_name"=>$name,
+            );
+            $this->db->where("cat_id",$id);
+            $this->db->update($this->table,$data);
+            return ($this->db->affected_rows()>0)?true:false;
+        }
+
+    } 
+
+
+
+
 }
 
 
