@@ -6,7 +6,10 @@ class Article extends CI_Controller{
 
     function __construct(){
         parent::__construct();
+        $this->load->database();
         $this->host_url="http://localhost/dingxindianqi";
+        $this->load->model("articleModel","articlemodel");
+
     }
 
     function index(){
@@ -34,7 +37,7 @@ class Article extends CI_Controller{
             //$date=date();
             $author="1";
 
-            $this->load->model("articleModel","articlemodel");
+
 
             //add($name,$author,$note="",$content,$istop="")
             $ret=$this->articlemodel->
@@ -56,7 +59,6 @@ class Article extends CI_Controller{
 
         }else{
             $id=$_POST["id"];
-            $this->load->model("articleModel","articlemodel");
             $ret=$this->articlemodel->remove($id);
             print_r($ret);
         }
@@ -69,21 +71,25 @@ class Article extends CI_Controller{
 
     }
 
-
-    function listshow(){
+function listshow(){ 
 
         if(!isset($_POST["catid"])){
             //
-            
-        }else{
-            //list show article with a catid
+
             $data=array(
-                "host_url"=>"",
+                $query= $this->db->get(
+                    $this->articlemodel->table
+                ),
+                "query"=>$query,
             );
             $this->load->view(
                 "article/listshowView",
                 $data
             );
+            
+        }else{
+            //list show article with a catid
+            //
         }
 
     }
