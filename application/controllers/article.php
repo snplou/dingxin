@@ -2,12 +2,15 @@
 
 class Article extends CI_Controller{
 
+    var $host_url;
 
     function __construct(){
         parent::__construct();
+        $this->host_url="http://localhost/dingxindianqi";
     }
 
     function index(){
+        echo "article controller index"; 
 
     }
 
@@ -15,9 +18,10 @@ class Article extends CI_Controller{
     function add(){
 
         if(!isset($_POST["articlecontent"]) || 
-            !isset($_POST["articletitle"])
+            !isset($_POST["articletitle"])  ||
+            !isset($_POST["articlecat"])
         ){
-            $data["host_url"]="http://localhost/testphp/dingxindianqi";
+            $data["host_url"]=$this->host_url;
             $this->load->view(
                 "article/addView",
                 $data
@@ -26,13 +30,15 @@ class Article extends CI_Controller{
         }else{
             $content=$_POST["articlecontent"];
             $title=$_POST["articletitle"];
+            $cat=$_POST["articlecat"];
             //$date=date();
             $author="1";
 
             $this->load->model("articleModel","articlemodel");
 
             //add($name,$author,$note="",$content,$istop="")
-            $ret=$this->articlemodel->add($title,$author,NULL,$content,1);
+            $ret=$this->articlemodel->
+                add($title,$author,NULL,$content,1,14);
             if($ret){
                 echo "article added";
             }
@@ -42,7 +48,7 @@ class Article extends CI_Controller{
     function remove(){
 
         if(!isset($_POST["id"])){
-            $data["host_url"]="http://localhost/testphp/dingxindianqi";
+            $data["host_url"]=$this->host_url;
             $this->load->view(
                 "article/removeView",
                 $data

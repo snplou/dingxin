@@ -14,7 +14,7 @@ class ArticleModel extends CI_Model{
 
     }
 
-    function add($name,$author,$note="",$content,$istop=""){
+    function add($name,$author,$note="",$content,$istop="",$cat){
 
         if($note!==""){
             $row["article_note"]=$note;
@@ -25,11 +25,12 @@ class ArticleModel extends CI_Model{
 
         $row=array(
             "article_name"=>$name,
-            "article_author"=>"",
-            //"article_note"=>$note,
+            "article_author"=>$author,
             //"article_date"=>date(),
+            "article_note"=>$note,
             "article_content"=>$content,
-            "article_istop"=>1,
+            "article_istop"=>0,
+            "article_cat"=>$cat,
         );
 
         $this->db->insert($this->table,$row);

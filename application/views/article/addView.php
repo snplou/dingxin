@@ -6,10 +6,11 @@
 <body>
 <form action="<?php echo $host_url?>/index.php/article/add" method="post">
 
-    <label for="articletitle" > 文章标题 <label> 
-    <input id="articletitle" name="articletitle" type="text">
+    文章类别<input id="articlecat" name="articlecat" type="text">
+    文章标题<input id="articletitle" name="articletitle" type="text">
 
     <script id="ueditorcontainer" name="articlecontent" type="text/plain" ></script>
+
     <input type="submit" value="提交">
 
 </form>
