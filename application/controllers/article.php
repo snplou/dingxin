@@ -7,6 +7,7 @@ class Article extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->database();
+        $this->load->library("table");
         $this->host_url="http://localhost/dingxindianqi";
         $this->load->model("articleModel","articlemodel");
 
@@ -14,7 +15,6 @@ class Article extends CI_Controller{
 
     function index(){
         echo "article controller index"; 
-
     }
 
 
@@ -41,7 +41,7 @@ class Article extends CI_Controller{
 
             //add($name,$author,$note="",$content,$istop="")
             $ret=$this->articlemodel->
-                add($title,$author,NULL,$content,1,14);
+                add($title,$author,NULL,$content,1,$cat);
             if($ret){
                 echo "article added";
             }
@@ -71,31 +71,37 @@ class Article extends CI_Controller{
 
     }
 
-function listshow(){ 
+    function show(){ 
 
-        if(!isset($_POST["catid"])){
-            //
+        $catid=(isset($_GET["catid"]))?
+            intval($_GET["catid"]):1;
+        $query=$this->articlemodel->listshow($catid);
+        
+        if($query->num_rows()>1){
+            //listshow
+            $this->load->library("table");
+            echo $this->table->generate($query->result_array());
 
-            $data=array(
-                $query= $this->db->get(
-                    $this->articlemodel->table
-                ),
-                "query"=>$query,
-            );
-            $this->load->view(
-                "article/listshowView",
-                $data
-            );
-            
+        } elseif($query->num_rows()==1){
+            //detailshow
+            $row=$query->result();
+            echo $row[0]->article_content;
         }else{
-            //list show article with a catid
-            //
+            echo "welcome";
         }
+
+
 
     }
 
 
     function detailshow(){
+
+        $articleid=(isset($_GET["articleid"]))?
+            inval($_GET["articleid"]):1;
+        $query=$this->articlemodel->detailshow($articleid);
+        $rows=$query->result();
+        echo($rows[0]->article_content);
 
     }
 

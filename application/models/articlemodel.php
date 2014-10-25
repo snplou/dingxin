@@ -58,11 +58,23 @@ class ArticleModel extends CI_Model{
 
     }
 
-    function listshow(){
+    function listshow($catid=1){
+
+        $this->db
+            ->select("article_id,article_name,article_content,article_date") 
+            ->from($this->table)
+            ->where("article_cat",$catid);
+        return  $this->db->get();
 
     }
 
-    function detailshow(){
+    function detailshow($articleid=1){
+
+        $this->db
+            ->select("*") 
+            ->from($this->table)
+            ->where("article_id",$articleid);
+        return  $this->db->get();
 
     }
 

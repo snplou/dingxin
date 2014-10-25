@@ -25,16 +25,6 @@ class Category extends CI_Controller{
         echo "category index page";
     }
 
-    function subcats(){
-
-
-        $query=$this->categorymodel->get_cats_by_pid(1);
-        
-        foreach($query->result_object() as $row){
-            print_r($row);
-            echo "<hr>";
-        }
-    }
 
     function treenode(){
 
@@ -46,7 +36,7 @@ class Category extends CI_Controller{
             $node=array();
             $node["id"]=$row->cat_id;
             $node["text"]=$row->cat_name;
-            $node["state"]=($this->categorymodel->has_child_cats($id))? "closed" :"open" ;
+            $node["state"]=($this->categorymodel->has_child_cats($row->cat_id))? "closed" :"open" ;
             array_push($result,$node);
         }
         echo json_encode($result);
