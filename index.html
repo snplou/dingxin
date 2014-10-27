@@ -22,7 +22,8 @@
         <ul id="navtree" class="easyui-tree" > </ul>
     </div>
 
-    <div id="centreg" region='center' split:true title='主页' > </div>
+    <div id="centreg" region='center' split:true title='主页' > 
+    </div>
     <div id="southreg" region='south' split:true title="页脚"> </div>
 
 
@@ -33,17 +34,23 @@
 <script >
     $("#navtree").tree(
         {
-            url:"http://localhost/dingxindianqi/index.php/category/treenode",
+            url:"http://localhost/dingxindianqi/index.php/category/treenode #dgTD",
             onSelect:function(node){
-                var content_url;
-                    //listshow
-                content_url="http://localhost/dingxindianqi/index.php/article/show?catid="+node.id;
-                $("#centreg").load(
-                    content_url
-                );
+                $(this).tree("toggle",node.target);
+                //show the center
+                loadCentralRegion(node);
             }    
         }
     );
+    function loadCentralRegion(node){
+
+      var centreg_url="http://localhost/dingxindianqi/index.php/article/show?catid="+node.id;
+      alert(centreg_url);
+      $("#centreg").load(centreg_url);
+      $("dgTD").datagrid("reload");
+      alert(333);
+      return false;
+    }
 </script>
 
 </body>

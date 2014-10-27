@@ -56,10 +56,18 @@ class ArticleModel extends CI_Model{
 
     function modify(){
 
+        
     }
 
-    function listshow($catid=1){
+    function listshow($catid=1,$page='',$rows=''){
 
+
+
+        
+        if(($page!='') && ($rows!='')){
+            $offset=($page-1)*$rows;
+            $this->db->limit($rows,$offset); 
+        }
         $this->db
             ->select("article_id,article_name,article_content,article_date") 
             ->from($this->table)
@@ -77,6 +85,7 @@ class ArticleModel extends CI_Model{
         return  $this->db->get();
 
     }
+
 
 
 }

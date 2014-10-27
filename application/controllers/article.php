@@ -79,15 +79,20 @@ class Article extends CI_Controller{
         
         if($query->num_rows()>1){
             //listshow
-            $this->load->library("table");
-            echo $this->table->generate($query->result_array());
+            $data_array["host_url"]=$this->host_url;
+            $data_array["catid"]=$catid;
+            $this->load->view(
+                "article/listshowView",
+                $data_array
+            );
 
         } elseif($query->num_rows()==1){
             //detailshow
             $row=$query->result();
             echo $row[0]->article_content;
         }else{
-            echo "welcome";
+            //show nothing
+            echo "welcome.none";
         }
 
 
@@ -105,6 +110,52 @@ class Article extends CI_Controller{
 
     }
 
+
+
+    //echo json for datagrid
+    function listshow(){
+
+        
+        if( !isset($_GET['catid'])||
+            !isset($_POST['page'])||
+            !isset($_POST['rows'])
+
+        ){
+            echo $_GET["catid"]."<hr>";
+            echo "parameters less:page ,rows must be provided";
+        }else{
+            $catid=intval($_GET["catid"]);
+            $page=$_POST['page'];
+            $rows=$_POST['rows'];
+
+            $result=array();
+            $result['total']=$this->articlemodel->listshow($catid)->num_rows();
+
+
+            $query=$this->articlemodel->listshow($catid,$page,$rows);
+
+            /*  generate html table
+            $this->load->library('table');
+            echo $this->table->generate($query);
+             */
+
+            //echo json for datagrid
+            $rs_array=array();
+            foreach($query->result() as $row){
+                $item["article_name"]=$row->article_name;
+                $item["article_date"]=$row->article_date;
+                array_push($rs_array,$item);
+            };
+            $result["rows"]=$rs_array;
+            echo json_encode($result);
+
+
+
+
+
+        }
+
+    }
 
 
 }
