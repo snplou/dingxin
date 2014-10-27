@@ -3,7 +3,8 @@
 
 <meta charset=utf-8>
 
-<link rel="stylesheet" type="text/css" href="http://localhost/dingxindianqi/jeasyui/themes/default/easyui.css">
+<!--todo: 把绝对路径改成相对路径  -->
+<link rel="stylesheet" type="text/css" href="http://localhost/dingxindianqi/jeasyui/themes/metro/easyui.css">
 <link rel="stylesheet" type="text/css" href="http://localhost/dingxindianqi/jeasyui/themes/icon.css">
 <script type="text/javascript" src="http://localhost/dingxindianqi/jeasyui/jquery.min.js"></script>
 <script type="text/javascript" src="http://localhost/dingxindianqi/jeasyui/jquery.easyui.min.js"></script>
@@ -15,15 +16,26 @@
 
 <body>
 
+<!--布局结构-->
 <div  class="easyui-layout" style="width:928px;height:600px">
 
+    <!--上部分-->
     <div id="northreg" region='north' split:true title="菜单导航"> </div>
+
+
+    <!--左部-->
     <div id="wesetreg" region='west' split:true title='导航'  style="width:30%">
-        <ul id="navtree" class="easyui-tree" > </ul>
+      <!--导航树 -->
+      <ul class="easyui-tree" id="navtree" > </ul>
     </div>
 
+    <!--中部-->
     <div id="centreg" region='center' split:true title='主页' > 
+      <!--标签页容器-->
+      <div id="tabcontainer" class="easyui-tabs"> </div>
     </div>
+
+    <!--下部-->
     <div id="southreg" region='south' split:true title="页脚"> </div>
 
 
@@ -31,26 +43,50 @@
 
 
 
-<script >
-    $("#navtree").tree(
-        {
-            url:"http://localhost/dingxindianqi/index.php/category/treenode #dgTD",
-            onSelect:function(node){
-                $(this).tree("toggle",node.target);
-                //show the center
-                loadCentralRegion(node);
-            }    
-        }
-    );
-    function loadCentralRegion(node){
 
-      var centreg_url="http://localhost/dingxindianqi/index.php/article/show?catid="+node.id;
-      alert(centreg_url);
-      $("#centreg").load(centreg_url);
-      $("dgTD").datagrid("reload");
-      alert(333);
-      return false;
-    }
+
+
+
+<script >
+
+  //匿名空间
+  (function(){
+
+
+
+
+
+    //导航树创建
+      $("#navtree").tree({
+        url:"http://localhost/dingxindianqi/index.php/category/treenode #dgTD",
+        onClick:function(node){//动态选择、添加中部tabs
+
+            $("#navtree").tree('toggle',node.target);
+            if(node.state=="open"){
+                var title=node.id+"\t"+node.text,
+                    tabcontainer=$("#tabcontainer");
+
+                if(tabcontainer.tabs('exists',title)){//选择已经存在的tab
+                    tabcontainer.tabs('select',title);
+                }else{ //创建tab
+                    tabcontainer.tabs(
+                        'add',
+                        {'title':title,
+                          'content':'<a herf=www.baidu.com>',
+                          'closable':true,
+                          'href':"http://localhost/dingxindianqi/index.php/article/show?catid="+node.id,
+                        }
+                    );
+                }
+            }
+        }
+      });
+
+
+
+
+
+  })();
 </script>
 
 </body>

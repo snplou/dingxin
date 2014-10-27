@@ -35,7 +35,7 @@ class Category extends CI_Controller{
         foreach($query->result_object() as $row){
             $node=array();
             $node["id"]=$row->cat_id;
-            $node["text"]=$row->cat_name;
+            $node["text"]= $row->cat_name;  
             $node["state"]=($this->categorymodel->has_child_cats($row->cat_id))? "closed" :"open" ;
             array_push($result,$node);
         }

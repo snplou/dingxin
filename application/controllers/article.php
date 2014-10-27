@@ -81,6 +81,7 @@ class Article extends CI_Controller{
             //listshow
             $data_array["host_url"]=$this->host_url;
             $data_array["catid"]=$catid;
+
             $this->load->view(
                 "article/listshowView",
                 $data_array
@@ -94,8 +95,6 @@ class Article extends CI_Controller{
             //show nothing
             echo "welcome.none";
         }
-
-
 
     }
 
@@ -148,11 +147,6 @@ class Article extends CI_Controller{
             };
             $result["rows"]=$rs_array;
             echo json_encode($result);
-
-
-
-
-
         }
 
     }
