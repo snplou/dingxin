@@ -1,7 +1,4 @@
-<table id="dgTD" class="easyui-datagrid" 
-    url="<?php echo $host_url ?>/index.php/article/listshow?catid=<?php echo $catid ?>" 
-    pagination=true
- >
+<table id="dgTD" class="easyui-datagrid" >
     <thead>
         <tr>
             <th field='article_name'>title </th>
@@ -13,3 +10,22 @@
     </tbody>
 
 </table>
+
+<script>
+//匿名空间
+(function(){
+
+
+
+    $("#dgTD").datagrid({
+        url:"<?php echo $host_url ?>/index.php/article/listshow?catid=<?php echo $catid ?>" ,
+        pagination:true,
+        fit:true,
+        singleselect:true,
+    });
+
+
+
+
+})();
+</script>
