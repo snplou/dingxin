@@ -62,6 +62,7 @@
         onClick:function(node){//动态选择、添加中部tabs
 
             $("#navtree").tree('toggle',node.target);
+            /*
             if(node.state=="open"){
                 var title=node.id+"\t"+node.text,
                     tabcontainer=$("#tabcontainer");
@@ -79,6 +80,13 @@
                     );
                 }
             }
+            */
+
+            $("#centreg").panel( {
+              'region':"center",
+              'href':"http://localhost/dingxindianqi/index.php/article/show?catid="+node.id,
+            });
+
         }
       });
 
