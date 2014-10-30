@@ -19,41 +19,42 @@
         </tr>
     </thead>
     </table>
+
+    <script>
+    //匿名空间
+    (function(){
+
+
+
+        $("#user-datagrid").datagrid({
+            columns:[[
+                {field:"username",title:"用户名"},
+                {field:"email",title:"email"},
+                {field:"create_date",title:"创建时间"},
+                {
+                    field:"frozen",
+                    title:"冻结状态",
+                    editor:{
+                        type:"textbox",
+                    } 
+                },
+            ]],
+            url:"<?php echo $host_url?>/index.php/user/datagrid_json",    //url to retreive datagrid 
+            pagination:true,
+            straped:true,
+            fit:true,
+            sortName:"username",
+            rownumbers:true,
+        });
+
+
+
+
+        
+
+    })();
+
+    </script>
 </body>
 
-<script>
-//匿名空间
-(function(){
-
-
-
-    $("#user-datagrid").datagrid({
-        columns:[[
-            {field:"username",title:"用户名"},
-            {field:"email",title:"email"},
-            {field:"create_date",title:"创建时间"},
-            {
-                field:"frozen",
-                title:"冻结状态",
-                editor:{
-                    type:"textbox",
-                } 
-            },
-        ]],
-        url:"<?php echo $host_url?>/index.php/user/datagrid_json",    //url to retreive datagrid 
-        pagination:true,
-        straped:true,
-        fit:true,
-        sortName:"username",
-        rownumbers:true,
-    });
-
-
-
-
-    
-
-})();
-
-</script>
 </html>

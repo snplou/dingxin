@@ -22,7 +22,7 @@ north
 <?php include "func_nav.php"?>
 </div>
 
-<div region='center' >
+<div region='center' id=regCenter>
 center
 </div>
 
