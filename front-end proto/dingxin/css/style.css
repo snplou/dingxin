@@ -1,0 +1,151 @@
+*{padding:0; margin:0}
+ul{ list-style:none}
+.clear{ clear:both}
+a{ text-decoration:none}
+img{ border:none}
+em{ font-style:normal}
+i{ font-style:normal}
+body{ font-size:12px; color:#333}
+
+.head{ width:940px; margin:0 auto; overflow:hidden}
+.head_logo{ float:left;  padding:28px 16px  20px 16px}
+.head_txt{ float:right}
+.head_txt a{ display:block; float:left; font-size:12px; color:#333; line-height:24px;}
+.head_txt span{ display:block; float:left; padding:0 13px; line-height:24px;+line-height:21px; _line-height:21px}
+/*head end*/
+
+.nav_bg{ width:100%; height:35px; background:url(../images/nav_bg.gif) repeat-x; overflow:hidden}
+.navigation{ width:940px; margin:0 auto; height:35px; overflow:hidden}
+.navigation ul li{ float:left}
+.navigation ul li a{ height:35px;display:block; float:left; padding:0 18px; font-size:14px; color:#333; font-family:"微软雅黑"; line-height:35px; }
+.navigation ul li a:hover{ background-color:#43617b; color:#fff}
+/*nav_bg end*/
+
+.nav_bottomImg,.banner{ width:940px; margin:0 auto; overflow:hidden}
+/*nav_bottomImg end*/
+
+.banner{ position:relative}
+.banner_BigImg{ width:940px; height:412px; overflow:hidden}
+.banner_Button{ width:940px; height:67px; position:absolute; bottom:0; left:0; 
+/*+background-color:transparent;
++filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#26000000, endColorstr=#26000000;*/
+background:rgba(0,0,0,0.4) none repeat scroll !important; 
+background:#000; filter:Alpha(opacity=40);
+}
+.banner_Button ul{ float:right} 
+.banner_Button ul li{ float:left; width:88px; margin-right:15px;height:67px; display:block; position:relative;}
+.banner_Button ul li a{ width:84px; height:37px; display:block; border:2px solid #fff; position:absolute; top:16px; z-index:10;}
+.banner_ButtonCur a{ top:-16px!important}
+/*banner end*/
+
+.information,.newsGood{ width:940px; margin:0 auto; margin-top:8px; overflow:hidden}
+.inf_left{ width:376px; float:left}
+.inf_lTit,.newsGood_title{ width:374px; height:30px; border:1px solid #dbdbdb; line-height:30px; background:url(../images/information_bg.gif) repeat-x; overflow:hidden}
+.inf_lTit span,.newsGood_title span{ padding-left:13px; font-size:13px; color:#333; font-weight:700; display:block; float:left}
+.inf_lTit a,.newsGood_title a{ display:block; float:right; margin-right:15px; font-size:12px; color:#333;}
+.inf_lTit a:hover,.inf_cenFoot ul li a:hover,.newsGood_title a:hover{ color:#990000}
+.inf_lFoot,.inf_cenFoot,.inf_RFoot{ margin-top:4px; padding:13px 7px; background-color:#F5F4F4; height:174px; overflow:hidden}
+.inf_lFootImg{ display:block; float:left; width:130px;}
+.inf_lFootTxt{ display:block; float:right; width:220px; font-size:12px; color:#333; line-height:25px; text-indent:2em}
+/*inf_left end*/
+.inf_center{ width:340px; float:left; margin:0 12px;}
+.inf_cenTit{ width:338px;}
+.inf_cenFoot{ background-color:#fff; padding:0;}
+.inf_cenFoot ul li{ margin-top:8px; font-size:12px; color:#333; line-height:24px; width:100%; overflow:hidden}
+.inf_cenFoot ul li b{ display:block; float: left; margin:0 3px;+margin:0 5px;_margin:0 3px;}
+.inf_cenFoot ul li a{ display:block; float:left; color:#333;}
+.inf_cenFoot ul li span{ display:block; float:right; width:89px;}
+/*inf_center end*/
+.inf_Right{ width:200px; float:right}
+.inf_RTit{ width:198px;}
+.inf_RFoot{ padding:13px 11px;}
+.inf_RFoot ul li{ font-size:12px; color:#333; line-height:24px}
+/*information end*/
+
+.newsGood_title{ width:938px }
+.newsGood_title span{ padding:0}
+.newsGood_title i{ display:block; float:left; margin:0 5px 0 10px;}
+.newsGood_inf{ width:938px; margin-top:4px; border:1px solid #dbdbdb;}
+.newsGood_inf1{ width:910px; margin:0 14px; position:relative; height:185px;  overflow:hidden}
+.newsGood_inf1 ul{ width:9999px; position:absolute; top:0; left:0;}
+.newsGood_inf1 ul li{ float:left; width:200px;}
+.newsGood_inf1 ul li img{ width:200px; height:150px; padding-top:5px;}
+.newsGood_inf1 ul li a{ font-size:12px; text-align:center; color:#333; line-height:30px; width:200px; height:180px; display:block}
+/*newsGood end*/
+
+.footer{ width:100%; margin-top:8px; border-top:5px solid #505c68; padding-bottom:20px; overflow:hidden}
+.foot{ width:850px; margin:0 auto; padding:18px 45px;overflow:hidden}
+.foot p{ line-height:24px; font-size:12px; color:#442A1D}
+
+/*index.html  end*/
+
+.com_Img{ width:940px; margin:0 auto; overflow:hidden}
+ 
+.com_center{ width:940px; margin:0 auto; margin-top:8px; overflow:hidden}
+.com_Left{ width:200px; float:left;background-color:#efefef;}
+.com_Left1{ min-height:883px}
+.com_LTit{ width:200px; height:32px; background:url(../images/subtitlebg.jpg) no-repeat; text-indent:30px; font-size:13px; color:#fff; line-height:32px; font-weight:700}
+.com_LInf{ width:100%;   overflow:auto}
+.com_LNav{ width:200px; overflow:hidden}
+.com_LNav ul li{ width:100%; height:29px; background:url(../images/lmtitlebg.jpg) no-repeat; text-indent:40px; }
+.com_LNav ul li a{color:#5A5859; line-height:29px; font-size:12px;}
+.com_LNav ul li a:hover{ text-decoration:underline; color:#990000}
+.com_LImg{ width:200px; margin-top:8px; overflow:hidden}
+.com_LAdd{ width:198px; border:1px solid #cfd0cb; border-bottom:none; overflow:hidden}
+.com_LAdd ul li{ width:198px; height:32px; background:url(../images/address_bg.gif) no-repeat; border-bottom:1px solid #cfd0cb; font-size:12px; color:#333; line-height:32px; text-indent:22px;}
+/*com_Left end*/
+.com_Right{ width:728px; float:right; border:1px solid #dbdbdb;}
+.com_RTit{ width:728px; height:30px; border-bottom:1px solid #dbdbdb; line-height:30px; background:url(../images/information_bg.gif) repeat-x; text-indent:13px;font-size:13px; color:#333; font-weight:700; }
+.com_RTxt{ width:96%; margin:0 auto; margin-top:8px;min-height:400px; overflow:hidden; }
+.com_RTxt span{ text-align:center}
+.com_RTxt p{ margin:12px 0; line-height:24px; color:#333; font-size:12px; text-indent:2em}
+.com_RText{ width:98%; margin:0 auto; height:400px; overflow:hidden}
+.com_RText ul li{ line-height:24px; color:#333; font-size:12px;}
+.com_RText b{ display:block; float:left; margin:0 3px;+margin:0 5px;_margin:0 3px;}
+.com_RText a{color:#333; font-size:12px;}
+.com_RText a:hover{ color:#990000; }
+.com_RText span{ display: block; float:right}
+.com_RTextPage{ width:100%; font-size:12px; color:#333; line-height:24px; text-align:center}
+/*com_Right end*/
+/*com_center end*/
+
+.pro_show{ width:94%; margin:0 auto; margin-top:8px; border-bottom:1px dashed #E3E3E3; overflow:hidden}
+.pro_showLeft{ float:left; margin:12px 0; width:25%}
+.pro_showLeft a img{ display:block; padding:2px; border:1px solid #E3E3E3; width:135px; height:100px;}
+.pro_showRight{ float:right; width:75%}
+.pro_showRight h3 a{ line-height:30px; font-size:13px; font-weight:700; color:#333}
+.pro_showRight p{ font-size:12px; color:#333; text-indent:2em; line-height:24px; margin:0}
+.pro_showRPage{ float:right; height:30px; display:block; }
+.pro_showRPage a{ color:#333; font-size:12px; line-height:30px}
+.pro_showBlank{ height:24px; width:100%; overflow:hidden}
+/*pro_show end*/
+
+.pro_showTable{ width:676px; margin:0 auto; margin:25px 0; border-top:1px solid #000; border-left:1px solid #000}
+.pro_showTable table{ width:676px; border:0}
+.pro_showTable table tr{ height:30px;}
+.pro_showTable table tr td{ border-bottom:1px solid #000; border-right:1px solid #000; text-align:center}
+.pro_showTab83{ width:83px;}
+.pro_showTab152{ width:152px;}
+.pro_showTab100{ width:100px;}
+.pro_showTab79{ width:79px;}
+.pro_showTab145{ width:145px;}
+.pro_showTabBack{ background-color:#000; border-color:#FFF!important; color:#fff}
+.pro_showTabBack1{ border-right:1px solid #000!important}
+/*pro_showTable end*/
+
+.projectInf{ width:100%;min-height:500px; overflow:hidden}
+.project_block{ width:214px; float:left; margin-left:10px; text-align:center}
+.project_block img{ width:188px; height:150px; display:block; padding:2px; border:1px solid #065661; margin:0 auto}
+.project_block span{ line-height:30px; text-align:center; color:#333; font-size:12px;}
+/*projectInf end*/
+
+.science{ font-size:10px!important; font-weight:700; color:#333}
+.scienceP{ text-indent:0!important;}
+.scienceBlank{ padding-left:70px;}
+/*science end*/
+
+.contact_Table{ width:100%; margin-top:48px; overflow:hidden}
+.contact_Table table{ width:576px; border-top:1px solid #c0c0c0;border-left:1px solid #c0c0c0}
+.contact_Table table tr td{ border-bottom:1px solid #c0c0c0;border-right:1px solid #c0c0c0; font-size:12px; color:#000; line-height:24px; text-indent:15px}
+.contact_Table143{ width:143px;}
+.contact_TableTxt{letter-spacing:10pt;}
