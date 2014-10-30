@@ -22,9 +22,10 @@ north
 <?php include "func_nav.php"?>
 </div>
 
-<div region='center' id=regCenter>
-center
+<div region='center' id=regCenter href="<?php echo $host_url;?>/index.php/backend_index/welecome">
+
 </div>
+
 
 <div region=south >
 <?php include "footer.php"?>
