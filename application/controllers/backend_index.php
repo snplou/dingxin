@@ -22,7 +22,7 @@ class Backend_index extends CI_Controller{
         );
 
         $this->load->view(
-            "backend_index",
+            "backend/backend_index",
             $array
         );
 
