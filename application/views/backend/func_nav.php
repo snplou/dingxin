@@ -7,15 +7,15 @@
 <div id=accordion class=easyui-accordion >
 
     <div title="用户管理">
-        <a class=easyui-menubutton menu="#mccUserSelect" >用户查询</a>
-        <a class=easyui-menubutton menu="#selectB" >用户冻结</a>
-        <a class=easyui-menubutton menu="#selectC" >用户核销</a>
+        <a class=easyui-menubutton menu="#mccUserSelect" >用户查询</a><br>
+        <a class=easyui-menubutton menu="#selectB" >用户冻结</a><br>
+        <a class=easyui-menubutton menu="#selectC" >用户核销</a><br>
     </div>
 
     <div title="栏目管理">
-        <a class=easyui-menubutton menu="#mccCatShow" >栏目查看</a>
-        <a class=easyui-menubutton menu="#mccCatAddModify" >栏目增改</a>
-        <a class=easyui-menubutton menu="#mccCatRemove" >栏目删除</a>
+        <a class=easyui-menubutton menu="#mccCatShow" >栏目查看</a><br>
+        <a class=easyui-menubutton menu="#mccCatAddModify" >栏目增改</a><br>
+        <a class=easyui-menubutton menu="#mccCatRemove" >栏目删除</a><br>
     </div>
 
     <div title="文章管理">
@@ -94,6 +94,16 @@
     $.parser.parse($("$mccUserSelect_zongbiao").parent());
 
 
+//为栏目查看(menu)的菜单内容的列表显示(linkbutton)添加单击事件处理脚本
+    $("#mccCatShow_list").click(
+        function(){
+            $("#regCenter").panel({
+                'region':"center",
+                'href':"http://localhost/dingxindianqi/index.php/category/treenode"
+            });
+        }
+    );
+    $.parser.parse($("$mccUserSelect_zongbiao").parent());
 
 
 
