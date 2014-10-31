@@ -42,6 +42,7 @@ class User extends CI_Controller{
 
     function datagrid_json(){
 
+        //有必要把校验、赋值提取到父类的datagrid_json中去
         if(!isset($_POST["rows"])||
             !isset($_POST["page"])
         ){

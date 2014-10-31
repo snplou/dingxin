@@ -91,7 +91,6 @@
             });
         }
     );
-    $.parser.parse($("$mccUserSelect_zongbiao").parent());
 
 
 //为栏目查看(menu)的菜单内容的列表显示(linkbutton)添加单击事件处理脚本
@@ -103,7 +102,6 @@
             });
         }
     );
-    $.parser.parse($("$mccUserSelect_zongbiao").parent());
 
 
 

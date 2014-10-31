@@ -29,6 +29,18 @@ class CategoryModel extends CI_Model{
 
 
 
+    function datagrid_json($rows=10,$page=1){
+
+        $offset=($page-1)*$rows;
+        $query=$this->db->get($this->table,$rows,$offset);
+        return $query;
+
+    }
+
+
+
+
+
     function add($pid,$name){
 
         if(!isset($pid)||!isset($name)){

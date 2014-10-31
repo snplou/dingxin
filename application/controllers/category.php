@@ -43,6 +43,30 @@ class Category extends CI_Controller{
     }
 
 
+
+
+    function datagrid_json(){
+        if(!isset($_POST["rows"])||
+            !isset($_POST["page"])
+
+        ){
+            //process a get request
+            echo "require post rows and page";
+        }else{
+            //process a post request
+            $rows=$_POST["rows"];
+            $page=$_POST["page"];
+
+            $query=$this->categorymodel->datagrid_json($rows,$page);
+            $this->load->library("table");
+            echo $this->table->generate($query);
+        }
+    }
+
+
+
+
+
     function add(){
         if(!isset($_POST["pid"])){
             //porcess a requset with a get method
