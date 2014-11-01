@@ -67,14 +67,32 @@ class Category extends CI_Controller{
             $rows=array();
             foreach($query->result() as $row ){
                 $item=array();
-                $item["id"]=$row->cat_id;
-                $item["name"]=$row->cat_name;
-                $item["pid"]=$row->cat_pid;
+                $item["category_id"]=$row->cat_id;
+                $item["category_name"]=$row->cat_name;
+                $item["category_pid"]=$row->cat_pid;
                 array_push($rows,$item);
             }
             $result["rows"]=$rows;
             echo json_encode($result);
             
+        }
+    }
+
+
+
+
+    function listshow(){
+        if(!isset($_POST["rows"])||
+            !isset($_POST["page"])
+        ){
+            //process a get request
+            $content_array["host_url"]=$this->host_url;
+            $this->load->view(
+                "category/listshowView",
+                $content_array
+            );
+        }else{
+            //process a post requset
         }
     }
 
