@@ -14,21 +14,24 @@
 
 </head>
 <body class=easyui-layout>
+
 <div region=north >
-north
+    <!--以后加点logo-->
+    north
 </div>
 
 <div id="west" region='west' style="width:30%;" >
-<?php include "func_nav.php"?>
+    <!--服务端嵌套:func_nav导航UI-->
+    <?php include "func_nav.php"?>
 </div>
 
 <div region='center' id=regCenter href="<?php echo $host_url;?>/index.php/backend_index/welecome">
-
+    <!--ajax动态请求:具体内容-->
 </div>
 
 
 <div region=south >
-<?php include "footer.php"?>
+    <?php include "footer.php"?>
 </div>
 
 </body>

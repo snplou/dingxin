@@ -98,7 +98,7 @@
         function(){
             $("#regCenter").panel({
                 'region':"center",
-                'href':"http://localhost/dingxindianqi/index.php/category/treenode"
+                'href':"http://localhost/dingxindianqi/index.php/category/datagrid_json"
             });
         }
     );

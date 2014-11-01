@@ -58,8 +58,23 @@ class Category extends CI_Controller{
             $page=$_POST["page"];
 
             $query=$this->categorymodel->datagrid_json($rows,$page);
+            /*
             $this->load->library("table");
             echo $this->table->generate($query);
+             */
+
+            $result["total"]=$query->num_rows();
+            $rows=array();
+            foreach($query->result() as $row ){
+                $item=array();
+                $item["id"]=$row->cat_id;
+                $item["name"]=$row->cat_name;
+                $item["pid"]=$row->cat_pid;
+                array_push($rows,$item);
+            }
+            $result["rows"]=$rows;
+            echo json_encode($result);
+            
         }
     }
 
