@@ -59,12 +59,6 @@ class Category extends CI_Controller{
 
             $result["total"]=$this->categorymodel->datagrid_total();
             $query=$this->categorymodel->datagrid_rows($rows,$page);
-            /*
-            $this->load->library("table");
-            echo $this->table->generate($query);
-             */
-
-
             $rows=array();
             foreach($query->result() as $row ){
                 $item=array();

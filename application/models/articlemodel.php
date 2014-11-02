@@ -61,9 +61,6 @@ class ArticleModel extends CI_Model{
 
     function listshow($catid=1,$page='',$rows=''){
 
-
-
-        
         if(($page!='') && ($rows!='')){
             $offset=($page-1)*$rows;
             $this->db->limit($rows,$offset); 
@@ -75,6 +72,23 @@ class ArticleModel extends CI_Model{
         return  $this->db->get();
 
     }
+
+
+
+
+
+    function datagrid_total($catid=1){
+        $this->db
+            -> select("count(*) as count")
+            ->from($this->table)
+            ->where("article_cat",$catid);
+        $query=$this->db->get()->result();
+        return $query[0]->count;
+    }
+
+
+
+
 
     function detailshow($articleid=1){
 
