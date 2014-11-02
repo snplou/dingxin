@@ -28,13 +28,19 @@ class CategoryModel extends CI_Model{
 
 
 
+    function datagrid_total(){
+        $query=$this->db->
+            select("count(*) as count")->
+            from($this->table);//todo:加上where条件
+        $query=$this->db->get()->result();
+        $row=$query[0];
+        return $row->count;
+    }
 
-    function datagrid_json($rows=10,$page=1){
-
+    function datagrid_rows($rows=10,$page=1){ 
         $offset=($page-1)*$rows;
         $query=$this->db->get($this->table,$rows,$offset);
         return $query;
-
     }
 
 

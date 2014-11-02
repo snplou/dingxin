@@ -17,7 +17,7 @@
 
 <div region=north >
     <!--以后加点logo-->
-    north
+    后台管理系统
 </div>
 
 <div id="west" region='west' style="width:30%;" >
@@ -38,7 +38,7 @@
 
 
 
-
+<!--匿名函数空间-->
 <script>
 (function(){
 

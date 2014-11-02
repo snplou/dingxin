@@ -7,15 +7,15 @@
 <div id=accordion class=easyui-accordion >
 
     <div title="用户管理">
-        <a class=easyui-menubutton menu="#mccUserSelect" >用户查询</a><br>
-        <a class=easyui-menubutton menu="#selectB" >用户冻结</a><br>
-        <a class=easyui-menubutton menu="#selectC" >用户核销</a><br>
+        <a class=easyui-menubutton menu="#mccUserSelect" >用户查询</a>
+        <a class=easyui-menubutton menu="#selectB" >用户冻结</a>
+        <a class=easyui-menubutton menu="#selectC" >用户核销</a>
     </div>
 
     <div title="栏目管理">
-        <a class=easyui-menubutton menu="#mccCatShow" >栏目查看</a><br>
-        <a class=easyui-menubutton menu="#mccCatAddModify" >栏目增改</a><br>
-        <a class=easyui-menubutton menu="#mccCatRemove" >栏目删除</a><br>
+        <a class=easyui-menubutton menu="#mccCatShow" >栏目查看</a>
+        <a class=easyui-menubutton menu="#mccCatAddModify" >栏目增改</a>
+        <a class=easyui-menubutton menu="#mccCatRemove" >栏目删除</a>
     </div>
 
     <div title="文章管理">

@@ -22,7 +22,14 @@
         pagination:true,
         fit:true,
         singleselect:true,
+        striped:true,
+        rownumbers:true,
     }); 
+    $("#dgCategory").datagrid("getPager").pagination( {
+        onSelectPage:function(pageNumber,pageSize){
+            alert(pageNumber,pageSize);
+        },
+    });
     
     
     
