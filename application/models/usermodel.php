@@ -12,7 +12,7 @@ class UserModel extends CI_Model{
 
 
 
-    function datagrid_json($rows,$page){
+    function datagrid_rows($rows,$page){
 
         $offset=($page-1)*$rows;
 

@@ -51,7 +51,7 @@ class User extends CI_Controller{
             $rows=$_POST["rows"];
             $page=$_POST["page"];
 
-            $query=$this->usermodel->datagrid_json($rows,$page);
+            $query=$this->usermodel->datagrid_rows($rows,$page);
 
             $result["total"]=$this->usermodel->datagrid_total();
             $mat=array();

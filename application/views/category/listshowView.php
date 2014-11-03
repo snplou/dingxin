@@ -1,16 +1,5 @@
-<table class=easyui-datagrid id="dgCategory"> 
-
-    <thead>
-        <tr>
-            <th field='category_id'>id </th>
-            <th field='category_name'>名称 </th>
-            <th field='category_pid'>pid </th>
-        </tr>
-    </thead>
-
-    <tbody> </tbody>
-
-</table>
+<!--datagrid-->
+<table  id="dgCategory" > </table>
 
 <script>
 (function(){
@@ -24,12 +13,14 @@
         singleselect:true,
         striped:true,
         rownumbers:true,
+        columns:[
+            [
+                {field:'category_id',title:'id',editor:'text'},
+                {field:'category_name',title:'栏目',},
+                {field:'category_pid',title:'pid',},
+            ],
+        ]
     }); 
-    $("#dgCategory").datagrid("getPager").pagination( {
-        onSelectPage:function(pageNumber,pageSize){
-            alert(pageNumber,pageSize);
-        },
-    });
     
     
     

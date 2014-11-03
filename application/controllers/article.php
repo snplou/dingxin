@@ -128,7 +128,7 @@ class Article extends CI_Controller{
             $rows=$_POST['rows'];
 
             $result=array();
-            $result['total']=$this->articlemodel->datagrid_total($cati);
+            $result['total']=$this->articlemodel->datagrid_total($catid);
 
 
             $query=$this->articlemodel->listshow($catid,$page,$rows);
