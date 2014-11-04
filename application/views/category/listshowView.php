@@ -8,8 +8,8 @@
 <!--工具栏-->
 <div id="dgtoolbarCategory" >
     <a class=easyui-linkbutton id="lbtnCategoryAddRow" iconCls=icon-add >新增</a>
-    <a class=easyui-linkbutton iconCls=icon-edit>编辑</a>
-    <a class=easyui-linkbutton iconCls=icon-remove>删除</a>
+    <a class=easyui-linkbutton id="lbtnCategoryUpdateRow" iconCls=icon-edit>编辑</a>
+    <a class=easyui-linkbutton id="lbtnCategoryRemoveRow" iconCls=icon-remove>删除</a>
 </div>
 
 
@@ -35,7 +35,7 @@
         toolbar:"#dgtoolbarCategory",
         idField:"category_id",
         fit:true,
-        singleselect:true,
+        singleSelect:true,
         striped:true,
         rownumbers:true,
         columns:[
@@ -65,11 +65,38 @@
                 dlgDOMNODE=$("#dlgCRUD_Category");
 
             setFormInDlg(dlgDOMNODE,fieldarray,"http://www.baidu.com");
+            $("#formCU").form("clear");
             dlgDOMNODE.dialog("open");
         }
     );
 
 
+
+    //绑定单击事件
+    $("#lbtnCategoryUpdateRow").click(
+        function(){
+            //获取选择行
+            var row=$("#dgCategory").datagrid("getSelected");
+
+
+            var fieldarray=getFieldFromDgJson(oDg),
+                html=genereateFormFromFieldArray(fieldarray),
+                dlgDOMNODE=$("#dlgCRUD_Category");
+
+            setFormInDlg(dlgDOMNODE,fieldarray,"http://www.baidu.com");
+            $("#formCU").form("load",row);
+            dlgDOMNODE.dialog("open");
+
+
+        }
+    );
+
+
+    //绑定单击事件
+    $("#lbtnCategoryRemoveRow").click(
+        function(){
+        }
+    );
 
 
 
@@ -122,7 +149,7 @@
         if(dlgDOMNODE.length<=0){
             alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
         }else{
-            var content="<form url='"+url+"' method="+method+">";
+            var content="<form id='formCU' url='"+url+"' method="+method+">";
             content+=genereateFormFromFieldArray(fieldarray);
             dlgDOMNODE.html(content);
         }
