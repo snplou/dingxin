@@ -16,12 +16,9 @@
 
 
 <!--对话框之新增一行-->
-<div class="easyui-dialog" closed=true buttons="#dlgAdd-CategoryRow" title="增加">
-
-    <div >
-    test form
-    </div>
-
+<div class="easyui-dialog"
+    closed=true resizbale=true width=560px
+    id="dlgAddUpdate_CategoryRow" >
 </div>
 
 
@@ -62,9 +59,16 @@
         function(){
             fieldarray=getFieldFromDgJson(oDg);
             html=genereateFormFromFieldArray(fieldarray);
-            alert(html);
+            var dlgDOMNODE=$("#dlgAddUpdate_CategoryRow");
+            setFormInDlg(dlgDOMNODE,fieldarray,"http://www.baidu.com");
+            dlgDOMNODE.dialog("open");
         }
     );
+
+
+
+
+
 
 
 
@@ -92,7 +96,7 @@
 
 
     //从fieldarray生成Form表单的输入内容(不含<form>和</form>标记)
-    function genereateFormFromFieldArray(){
+    function genereateFormFromFieldArray(fieldarray){
         var html="",field="",title="";
         for(var i=0;i<fieldarray.length;i++){
             field=fieldarray[i].field;
@@ -101,6 +105,19 @@
             html+=(title+"<input name="+field +"><br>");
         }
         return html;
+    }
+
+
+    //设置对话框中的表单
+    function setFormInDlg(dlgDOMNODE,fieldarray,url,method='post'){
+        if(!dlgDOMNODE){
+            alert("cannot find the dialog" );
+        }else{
+            var content="<form url='"+url+"' method="+method+">";
+            content+=genereateFormFromFieldArray(fieldarray);
+            dlgDOMNODE.html(content);
+        }
+        
     }
 
 
