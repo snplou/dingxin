@@ -59,14 +59,8 @@
     //绑定单击事件
     $("#lbtnCategoryAddRow").click(
         function(){
-
-            var fieldarray=getFieldFromDgJson(oDg),
-                html=genereateFormFromFieldArray(fieldarray),
-                dlgDOMNODE=$("#dlgCRUD_Category");
-
-            setFormInDlg(dlgDOMNODE,fieldarray,"http://www.baidu.com");
-            $("#formCU").form("clear");
-            dlgDOMNODE.dialog("open");
+            showAddUpdateDialog(oDg,"dlgCRUD_Category",null);
+            //post
         }
     );
 
@@ -77,17 +71,12 @@
         function(){
             //获取选择行
             var row=$("#dgCategory").datagrid("getSelected");
-
-
-            var fieldarray=getFieldFromDgJson(oDg),
-                html=genereateFormFromFieldArray(fieldarray),
-                dlgDOMNODE=$("#dlgCRUD_Category");
-
-            setFormInDlg(dlgDOMNODE,fieldarray,"http://www.baidu.com");
-            $("#formCU").form("load",row);
-            dlgDOMNODE.dialog("open");
-
-
+            if(row!=null){
+                showAddUpdateDialog(oDg,"dlgCRUD_Category",null,row);
+            }else{
+                alert("必须先选择需要修改的行");
+            }
+            //post
         }
     );
 
@@ -95,6 +84,13 @@
     //绑定单击事件
     $("#lbtnCategoryRemoveRow").click(
         function(){
+            //获取选择行
+            var row=$("#dgCategory").datagrid("getSelected");
+            if(row!=null){
+                //删除
+            }else{
+                alert("必须先选择需要修改的行");
+            }
         }
     );
 
@@ -145,17 +141,49 @@
 
 
     //设置对话框中的表单
-    function setFormInDlg(dlgDOMNODE,fieldarray,url,method='post'){
+    function setFormInDlg(dlgDOMNODE,fieldarray){
         if(dlgDOMNODE.length<=0){
             alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
         }else{
-            var content="<form id='formCU' url='"+url+"' method="+method+">";
+            var content="<form id='formAddUpdate'> ";
             content+=genereateFormFromFieldArray(fieldarray);
+            content+="</form>";
             dlgDOMNODE.html(content);
         }
         
     }
 
+
+
+    //显示增加、删除操作的对话框
+    //input:这里oDg是JSON对象
+    //input:dlgID是对话框的ID,之所以传递ID而非JSON对象, 是方便使用JQquery选择器
+    //url:表单提交的地址
+    //input:如果传递了row,则为Update操作，否则为Add操作
+    function showAddUpdateDialog(oDg,dlgID,url,row=null){
+
+        var fieldarray=getFieldFromDgJson(oDg),
+            html=genereateFormFromFieldArray(fieldarray),
+            dlgDOMNODE=$("#"+dlgID);
+
+        if(dlgDOMNODE.length>0){
+            setFormInDlg(dlgDOMNODE,fieldarray);
+
+            if(row==null){
+                $("#"+dlgID+" form").form("clear");
+            }else{
+                $("#"+dlgID+" form").form("load",row);
+            }
+            //todo:设置url
+            dlgDOMNODE.dialog("open");
+        }else{
+            alert("error:cannot fine the dlgID:"
+                +dlgID+"\r\n"
+                +arguments.callee
+            );
+        }
+
+    }
 
 
 
