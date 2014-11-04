@@ -7,7 +7,7 @@
 
 <!--工具栏-->
 <div id="dgtoolbarCategory" >
-    <a class=easyui-linkbutton id="lbtnAdd_CategoryRow" iconCls=icon-add >新增</a>
+    <a class=easyui-linkbutton id="lbtnCategoryAddRow" iconCls=icon-add >新增</a>
     <a class=easyui-linkbutton iconCls=icon-edit>编辑</a>
     <a class=easyui-linkbutton iconCls=icon-remove>删除</a>
 </div>
@@ -18,7 +18,7 @@
 <!--对话框之新增一行-->
 <div class="easyui-dialog"
     closed=true resizbale=true width=560px
-    id="dlgAddUpdate_CategoryRow" >
+    id="dlgCRUD_Category" >
 </div>
 
 
@@ -50,16 +50,20 @@
 
 
 
+
     //生成datagrid
     $("#dgCategory").datagrid(oDg); 
 
 
 
-    $("#lbtnAdd_CategoryRow").click(
+    //绑定单击事件
+    $("#lbtnCategoryAddRow").click(
         function(){
-            fieldarray=getFieldFromDgJson(oDg);
-            html=genereateFormFromFieldArray(fieldarray);
-            var dlgDOMNODE=$("#dlgAddUpdate_CategoryRow");
+
+            var fieldarray=getFieldFromDgJson(oDg),
+                html=genereateFormFromFieldArray(fieldarray),
+                dlgDOMNODE=$("#dlgCRUD_Category");
+
             setFormInDlg(dlgDOMNODE,fieldarray,"http://www.baidu.com");
             dlgDOMNODE.dialog("open");
         }
@@ -73,6 +77,11 @@
 
 
 
+
+
+
+
+/////////////////////////////////////////////////////////////////
 
     //从用于构造datagrid的Json对象中获取字段数组
     function getFieldFromDgJson(oDg){
@@ -110,8 +119,8 @@
 
     //设置对话框中的表单
     function setFormInDlg(dlgDOMNODE,fieldarray,url,method='post'){
-        if(!dlgDOMNODE){
-            alert("cannot find the dialog" );
+        if(dlgDOMNODE.length<=0){
+            alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
         }else{
             var content="<form url='"+url+"' method="+method+">";
             content+=genereateFormFromFieldArray(fieldarray);
