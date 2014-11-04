@@ -2,7 +2,7 @@
 <table  id="dgCategory" title="栏目"> </table>
 
 
-<!--工具栏-->
+<!--datagrid的工具栏-->
 <div id="dgtoolbarCategory" >
     <a class=easyui-linkbutton id="lbtnCategoryAddRow" iconCls=icon-add >新增</a>
     <a class=easyui-linkbutton id="lbtnCategoryUpdateRow" iconCls=icon-edit>编辑</a>
@@ -11,8 +11,7 @@
 
 
 <!--Add和Update操作的对话框-->
-<div class="easyui-dialog" closed=true resizbale=true width=560px id="dlgCRUD_Category" >
- </div>
+<div id="dlgCRUD_Category" > </div>
 
 
 
@@ -27,11 +26,11 @@
 ///////////////////////////////////////////////////////////
 
     //DOM_ID系列常量
-    var DLG_CRUD_DOM_ID="dlgCRUD_Category",
-        DG_CRUD_DOM_ID="dgCategory",
-        LBTN_ADDROW_DOM_ID="lbtnCategoryAddRow",
-        LBTN_UPDATEROW_DOM_ID="lbtnCategoryUpdateRow",
-        LBTN_REMOVEROW_DOM_ID="lbtnCategoryRemoveRow";
+    var DLG_CRUD_DOM_ID="dlgCRUD_Category",    //dialog
+        DG_CRUD_DOM_ID="dgCategory",    //datagrid
+        LBTN_ADDROW_DOM_ID="lbtnCategoryAddRow",    //linkbutton
+        LBTN_UPDATEROW_DOM_ID="lbtnCategoryUpdateRow",    //linkbutton
+        LBTN_REMOVEROW_DOM_ID="lbtnCategoryRemoveRow";    //linkbutton
     
 
     //用于构造datagrid 的JSON对象
@@ -53,7 +52,13 @@
     }; 
     
 
-    var oDlgCrud={ };
+    //用于构造dialog的JSON对象
+    var oDlgCrud={ 
+        closed:true ,
+        resizbale:true, 
+        width:"560px",
+    };
+
 
 
 ///////////////////////////////////////////////////////////
@@ -63,7 +68,8 @@
 
     //生成datagrid
     $("#"+DG_CRUD_DOM_ID).datagrid(oDgCrud); 
-
+    //生成dialog
+    $("#"+DLG_CRUD_DOM_ID).dialog(oDlgCrud);
 
 
     //绑定单击事件:add
