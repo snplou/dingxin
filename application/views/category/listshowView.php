@@ -34,7 +34,7 @@
 
     //URL to CRUD
     var URL_TO_READ="<?php echo $host_url ?>/index.php/category/datagrid_json",   //url to retrieve data
-        URL_TO_ADD="",     //url to add 
+        URL_TO_ADD= "<?php echo $host_url?>/index.php/category/add",     //url to add 
         URL_TO_UPDATE="",    //url to update 
         URL_TO_REMOVE="";    //url to remove 
         
@@ -95,7 +95,7 @@
     //绑定单击事件:add
     $("#"+LBTN_ADDROW_DOM_ID).click(
         function(){
-            showAddUpdateDialog(oDgCrud,DLG_CRUD_DOM_ID,null);
+            showAddUpdateDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_ADD);
             //post
         }
     );
@@ -108,7 +108,7 @@
             //获取选择行
             var row=$("#"+DG_CRUD_DOM_ID).datagrid("getSelected");
             if(row!=null){
-                showAddUpdateDialog(oDgCrud,DLG_CRUD_DOM_ID,null,row);
+                showAddUpdateDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_UPDATE,row);
             }else{
                 alert("必须先选择需要修改的行");
             }
@@ -180,15 +180,22 @@
 
 
     //设置对话框中的表单
-    function setFormInDlg(dlgDOMNODE,fieldarray){
-        if(dlgDOMNODE.length<=0){
-            alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
+    //当href==null,利用fieldarray生成表单
+    //当href不为空，利用href远程加载表单
+    function setFormInDlg(dlgDOMNODE,fieldarray,href=null){
+        if(href==null){
+            if(dlgDOMNODE.length<=0){
+                alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
+            }else{
+                var content="<form id='formAddUpdate'> ";
+                content+=genereateFormFromFieldArray(fieldarray);
+                content+="</form>";
+                dlgDOMNODE.html(content);
+            }
         }else{
-            var content="<form id='formAddUpdate'> ";
-            content+=genereateFormFromFieldArray(fieldarray);
-            content+="</form>";
-            dlgDOMNODE.html(content);
+            dlgDOMNODE.dialog({href:"http://localhost"});
         }
+
         
     }
 
@@ -199,14 +206,14 @@
     //input:dlgID是对话框的ID,之所以传递ID而非JSON对象, 是方便使用JQquery选择器
     //url:表单提交的地址
     //input:如果传递了row,则为Update操作，否则为Add操作
-    function showAddUpdateDialog(oDgCrud,dlgID,url,row=null){
+    function showAddUpdateDialog(oDgCrud,dlgID,url,row=null,href=null){
 
         var fieldarray=getFieldFromDgJson(oDgCrud),
             html=genereateFormFromFieldArray(fieldarray),
             dlgDOMNODE=$("#"+dlgID);
 
         if(dlgDOMNODE.length>0){
-            setFormInDlg(dlgDOMNODE,fieldarray);
+            setFormInDlg(dlgDOMNODE,fieldarray,href);
 
             if(row==null){    //Add操作
                 $("#"+dlgID+" form").form("clear").form({"url":url});
