@@ -117,7 +117,7 @@ class Category extends CI_Controller{
 
 
     function remove(){
-        if(!isset($_POST["id"])){
+        if(!isset($_POST["category_id"])){
             //process a request with a get mothod
             
             $data=array(
@@ -128,13 +128,13 @@ class Category extends CI_Controller{
                 $data
             );
         } else{
-            $id=$_POST["id"];
+            $id=intval($_POST["category_id"]);
             $ret=$this->categorymodel->remove($id);
             
             if($ret){
-                echo "succeed";
+                echo "success";
             }else{
-                echo "false";
+                echo "fail";
             }
         }
     }

@@ -121,7 +121,7 @@
                 return ;
             }else{
                 if(row!=null){
-                    var postdata=idFieldName+"='"+row[idFieldName]+"';";
+                    var postdata=idFieldName+"="+row[idFieldName];
                     $.post(
                        URL_TO_REMOVE,
                        postdata,
