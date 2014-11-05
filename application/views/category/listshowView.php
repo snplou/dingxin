@@ -65,16 +65,8 @@
         resizbale:true, 
         width:"560px",
         buttons:[
-            {
-                text:"确定" ,iconCls:"icon-ok", handler:function(){
-                    alert("ok");
-                }
-            },
-            {
-                text:"取消" ,iconCls:"icon-cancel", handler:function(){
-                    alert("cancel");
-                }
-            },
+            { text:"确定" ,iconCls:"icon-ok", handler:btnInCrudDiglogSave },
+            { text:"取消" ,iconCls:"icon-cancel", handler:btnInCrudDiglogCancel },
         ],
     };
 
@@ -82,7 +74,7 @@
 
 
 ///////////////////////////////////////////////////////////
-    //生成控件操作
+    //生成控件操作及事件处理函数
 ///////////////////////////////////////////////////////////
 
 
@@ -130,6 +122,31 @@
             }
         }
     );
+
+
+
+    //CRUD操作的对话框中Save按钮 的事件处理函数
+    function btnInCrudDiglogSave(){
+
+        var url=$("#"+DLG_CRUD_DOM_ID+" form").attr("action"),
+            postdata=$("#"+DLG_CRUD_DOM_ID+" form").serialize();
+        $.post(
+            url,
+            postdata,
+            function(){
+                //todo:校验是否是success
+                alert("数据保存成功");
+            }
+        );
+        $("#"+DLG_CRUD_DOM_ID).dialog("close");
+    }
+
+
+    //CRUD操作的对话框中Cancel按钮 的事件处理函数
+    function btnInCrudDiglogCancel(){
+
+        $("#"+DLG_CRUD_DOM_ID).dialog("close");
+    }
 
 
 
@@ -182,12 +199,14 @@
     //设置对话框中的表单
     //当href==null,利用fieldarray生成表单
     //当href不为空，利用href远程加载表单
-    function setFormInDlg(dlgDOMNODE,fieldarray,href=null){
+    function setFormInDlg(dlgDOMNODE,fieldarray,actionurl,href=null){
         if(href==null){
             if(dlgDOMNODE.length<=0){
                 alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
             }else{
-                var content="<form id='formAddUpdate'> ";
+                var content="<form id='formAddUpdate'action='"
+                    +actionurl+
+                    "'method=post>";
                 content+=genereateFormFromFieldArray(fieldarray);
                 content+="</form>";
                 dlgDOMNODE.html(content);
@@ -213,17 +232,17 @@
             dlgDOMNODE=$("#"+dlgID);
 
         if(dlgDOMNODE.length>0){
-            setFormInDlg(dlgDOMNODE,fieldarray,href);
+            setFormInDlg(dlgDOMNODE,fieldarray,url,href);
 
             if(row==null){    //Add操作
-                $("#"+dlgID+" form").form("clear").form({"url":url});
+                $("#"+dlgID+" form").form("clear");
                 dlgDOMNODE.dialog({title:"增加",iconCls:"icon-add"});
             }else{    //Update操作
-                $("#"+dlgID+" form").form("load",row).form({"url":url});
+                $("#"+dlgID+" form").form("load",row);
                 dlgDOMNODE.dialog({title:"修改",iconCls:"icon-edit"});
             }
-            //todo:设置url
 
+            dlgDOMNODE.dialog("refresh");
             dlgDOMNODE.dialog("open");
         }else{
             alert("error:cannot fine the dlgID:"

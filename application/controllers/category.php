@@ -48,9 +48,7 @@ class Category extends CI_Controller{
     function datagrid_json(){
         if(!isset($_POST["rows"])||
             !isset($_POST["page"])
-
-        ){
-            //process a get request
+        ){ //process a get request
             echo "require post rows and page";
         }else{
             //process a post request
@@ -69,7 +67,6 @@ class Category extends CI_Controller{
             }
             $result["rows"]=$rows;
             echo json_encode($result);
-            
         }
     }
 
@@ -96,7 +93,7 @@ class Category extends CI_Controller{
 
 
     function add(){
-        if(!isset($_POST["pid"])){
+        if(!isset($_POST["category_pid"])){
             //porcess a requset with a get method
            $data=array(); 
            $data["host_url"]=$this->host_url;
@@ -107,11 +104,11 @@ class Category extends CI_Controller{
 
         }else{
             //process a request with a post method
-            $pid=$_POST["pid"];
-            $name=$_POST["name"];
+            $pid=$_POST["category_pid"];
+            $name=$_POST["category_name"];
             $ret=$this->categorymodel->add($pid,$name);
             if($ret){
-                echo "succeed";
+                echo "success";
             }
 
 
