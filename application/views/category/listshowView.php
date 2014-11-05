@@ -36,19 +36,19 @@
     var URL_TO_READ="<?php echo $host_url ?>/index.php/category/datagrid_json",   //url to retrieve data
         URL_TO_ADD= "<?php echo $host_url?>/index.php/category/add",     //url to add 
         URL_TO_UPDATE="",    //url to update 
-        URL_TO_REMOVE="";    //url to remove 
+        URL_TO_REMOVE="<?php echo $host_url?>/index.php/category/remove";    //url to remove 
         
     
 
     //用于构造datagrid 的JSON对象
     var oDgCrud={
-        url:URL_TO_READ ,
-        pagination:true,
-        toolbar:"#dgtoolbarCategory",  //工具栏
+        url:URL_TO_READ ,    //读取json数据的服务器地址
+        pagination:true,    //是否分页
         fit:true,
-        singleSelect:true,
-        striped:true,
-        rownumbers:true,
+        singleSelect:true,    //单行选择 
+        striped:true,    //条纹显示
+        rownumbers:true,    //是否显示行号
+        toolbar:"#dgtoolbarCategory",  //工具栏
         columns:[
             [
                 {field:'category_id',title:'id'},
@@ -56,15 +56,16 @@
                 {field:'category_pid',title:'pid',editor:{type:'text'}},
             ],
         ],
+        idField:"category_id",    //id 字段
     }; 
     
 
     //用于构造dialog的JSON对象
     var oDlgCrud={ 
-        closed:true ,
-        resizbale:true, 
-        width:"560px",
-        buttons:[
+        closed:true ,    //初始处于关闭状态
+        resizbale:true,     //可调整对话框大小
+        width:"560px",     //宽度
+        buttons:[          //下部按钮
             { text:"确定" ,iconCls:"icon-ok", handler:btnInCrudDiglogSave },
             { text:"取消" ,iconCls:"icon-cancel", handler:btnInCrudDiglogCancel },
         ],
@@ -114,11 +115,24 @@
         function(){
             //获取选择行
             var row=$("#"+DG_CRUD_DOM_ID).datagrid("getSelected");
-            if(row!=null){
-                //删除
-                alert("将要删除1行");
+            var idFieldName=getIDFieldFromDgJson(oDgCrud);
+            if(idFieldName==null){
+                alert("warning : 未指定idField字段，删除功能未触发");
+                return ;
             }else{
-                alert("必须先选择需要修改的行");
+                if(row!=null){
+                    var postdata=idFieldName+"='"+row[idFieldName]+"';";
+                    $.post(
+                       URL_TO_REMOVE,
+                       postdata,
+                       function(){
+                           //todo:校验返回success状态
+                           alert("删除执行");
+                       }
+                    );
+                }else{
+                    alert("必须先选择需要修改的行");
+                }
             }
         }
     );
@@ -177,6 +191,16 @@
             }
         }
         return fieldarray;
+    }
+
+
+
+
+
+    //从用于构造datagrid的Json对象中获取id字段名称 
+    function getIDFieldFromDgJson(oDgCrud){
+
+        return oDgCrud.idField;
     }
 
 
