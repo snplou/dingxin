@@ -47,7 +47,7 @@
         fit:true,
         singleSelect:true,    //单行选择 
         striped:true,    //条纹显示
-        rownumbers:true,    //是否显示行号
+        rownumbers:false,    //是否显示行号
         toolbar:"#dgtoolbarCategory",  //工具栏
         columns:[
             [
@@ -113,27 +113,30 @@
     //绑定单击事件:remove
     $("#"+LBTN_REMOVEROW_DOM_ID).click(
         function(){
-            //获取选择行
             var row=$("#"+DG_CRUD_DOM_ID).datagrid("getSelected");
             var idFieldName=getIDFieldFromDgJson(oDgCrud);
+
             if(idFieldName==null){
-                alert("warning : 未指定idField字段，删除功能未触发");
+                alert("warning : 配置中未指定idField字段，删除功能未触发");
                 return ;
             }else{
                 if(row!=null){
-                    $.post(
-                       URL_TO_REMOVE,
-                       row,
-                       function(){
-                           //todo:校验返回success状态
-                           alert("删除执行");
-                       }
+                    $.messager.confirm("警告",
+                        "当前正在执行删除:\r\n"+
+                            "行ID"+row[idFieldName]+
+                            "\r\n 该操作不可恢复，请请确认是否继续?",
+                        function(isOK){
+                            if(isOK){
+                                removeRow(row,idFieldName,URL_TO_REMOVE);
+                            }
+                        }
                     );
                 }else{
                     alert("必须先选择需要修改的行");
                 }
             }
-        }
+        } 
+
     );
 
 
@@ -275,6 +278,37 @@
         }
 
     }
+
+
+
+
+    function removeRow(row,idFieldName,URL_TO_REMOVE){
+
+        if(row!=null){
+            $.post(
+                URL_TO_REMOVE,
+                row,
+                function(data){
+                    //todo:校验返回success状态
+                    if(data=="success"){
+                        $.messager.show({
+                            title:"删除成功",
+                            msg:"记录:"+row[idFieldName]+" 已经被删除!",
+                        });
+                        //刷新表格
+                        $("#"+DG_CRUD_DOM_ID).datagrid("reload");
+                    }else{
+                        alert("当前删除操作未成功，请稍候再试");
+                    }
+                }
+            );
+        }
+    }
+
+
+
+
+
 
 
 
