@@ -121,10 +121,9 @@
                 return ;
             }else{
                 if(row!=null){
-                    var postdata=idFieldName+"="+row[idFieldName];
                     $.post(
                        URL_TO_REMOVE,
-                       postdata,
+                       row,
                        function(){
                            //todo:校验返回success状态
                            alert("删除执行");
