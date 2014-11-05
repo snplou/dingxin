@@ -27,6 +27,7 @@
 
 <div region='center' id=regCenter href="<?php echo $host_url;?>/index.php/backend_index/welecome">
     <!--ajax动态请求:具体内容-->
+    <div id="tabscontainer"><div>
 </div>
 
 
