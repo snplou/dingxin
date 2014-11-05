@@ -31,11 +31,18 @@
         LBTN_ADDROW_DOM_ID="lbtnCategoryAddRow",    //linkbutton
         LBTN_UPDATEROW_DOM_ID="lbtnCategoryUpdateRow",    //linkbutton
         LBTN_REMOVEROW_DOM_ID="lbtnCategoryRemoveRow";    //linkbutton
+
+    //URL to CRUD
+    var URL_TO_READ="<?php echo $host_url ?>/index.php/category/datagrid_json",   //url to retrieve data
+        URL_TO_ADD="",     //url to add 
+        URL_TO_UPDATE="",    //url to update 
+        URL_TO_REMOVE="";    //url to remove 
+        
     
 
     //用于构造datagrid 的JSON对象
     var oDgCrud={
-        url:"<?php echo $host_url ?>/index.php/category/datagrid_json" ,
+        url:URL_TO_READ ,
         pagination:true,
         toolbar:"#dgtoolbarCategory",  //工具栏
         fit:true,
@@ -57,8 +64,21 @@
         closed:true ,
         resizbale:true, 
         width:"560px",
+        buttons:[
+            {
+                text:"确定" ,iconCls:"icon-ok", handler:function(){
+                    alert("ok");
+                }
+            },
+            {
+                text:"取消" ,iconCls:"icon-cancel", handler:function(){
+                    alert("cancel");
+                }
+            },
+        ],
     };
 
+    
 
 
 ///////////////////////////////////////////////////////////
@@ -188,12 +208,15 @@
         if(dlgDOMNODE.length>0){
             setFormInDlg(dlgDOMNODE,fieldarray);
 
-            if(row==null){
-                $("#"+dlgID+" form").form("clear");
-            }else{
-                $("#"+dlgID+" form").form("load",row);
+            if(row==null){    //Add操作
+                $("#"+dlgID+" form").form("clear").form({"url":url});
+                dlgDOMNODE.dialog({title:"增加",iconCls:"icon-add"});
+            }else{    //Update操作
+                $("#"+dlgID+" form").form("load",row).form({"url":url});
+                dlgDOMNODE.dialog({title:"修改",iconCls:"icon-edit"});
             }
             //todo:设置url
+
             dlgDOMNODE.dialog("open");
         }else{
             alert("error:cannot fine the dlgID:"
