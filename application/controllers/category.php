@@ -26,6 +26,7 @@ class Category extends CI_Controller{
     }
 
 
+    //todo:改成tree_json
     function treenode(){
 
         $id=isset($_POST["id"])?$_POST["id"]:0;
@@ -73,14 +74,14 @@ class Category extends CI_Controller{
 
 
 
-    function listshow(){
+    function datagrid_show(){
         if(!isset($_POST["rows"])||
             !isset($_POST["page"])
         ){
             //process a get request
             $content_array["host_url"]=$this->host_url;
             $this->load->view(
-                "category/listshowView",
+                "category/datagrid_showView",
                 $content_array
             );
         }else{

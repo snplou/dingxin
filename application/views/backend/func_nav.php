@@ -73,7 +73,7 @@
         function(){
             $("#regCenter").panel({
                 'region':"center",
-                'href':"http://localhost/dingxindianqi/index.php/category/listshow"
+                'href':"http://localhost/dingxindianqi/index.php/category/datagrid_show"
             });
         }
     );
@@ -85,7 +85,7 @@
         function(){
             $("#regCenter").panel({
                 'region':"center",
-                'href':"http://localhost/dingxindianqi/index.php/article/listshow"
+                'href':"http://localhost/dingxindianqi/index.php/article/show?id=14"
             });
         }
     );
