@@ -28,9 +28,9 @@
     //DOM_ID系列常量
     var DLG_CRUD_DOM_ID="dlgCRUD_Category",    //dialog
         DG_CRUD_DOM_ID="dgCategory",    //datagrid
-        LBTN_ADDROW_DOM_ID="lbtnCategoryAddRow",    //linkbutton
-        LBTN_MODIFYROW_DOM_ID="lbtnCategoryModifyRow",    //linkbutton
-        LBTN_REMOVEROW_DOM_ID="lbtnCategoryRemoveRow";    //linkbutton
+        LBTN_ADDROW_DOM_ID="lbtnCategoryAddRow",    //linkbutton 增加一行
+        LBTN_MODIFYROW_DOM_ID="lbtnCategoryModifyRow",    //linkbutton 修改一行
+        LBTN_REMOVEROW_DOM_ID="lbtnCategoryRemoveRow";    //linkbutton 删除一行
 
     //URL to CRUD
     var URL_TO_READ="<?php echo $host_url ?>/index.php/category/datagrid_json",   //url to retrieve data
@@ -49,7 +49,7 @@
         striped:true,    //条纹显示
         rownumbers:false,    //是否显示行号
         toolbar:"#dgtoolbarCategory",  //工具栏
-        columns:[
+        columns:[    //多行表头组成的数组
             [
                 {field:'category_id',title:'id'},
                 {field:'category_name',title:'栏目',editor:{type:'text'}},
@@ -89,7 +89,6 @@
     $("#"+LBTN_ADDROW_DOM_ID).click(
         function(){
             showAddMODIFYDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_ADD);
-            //post
         }
     );
 
