@@ -143,7 +143,7 @@ class Category extends CI_Controller{
 
     function modify(){
 
-        if(!isset($_POST["id"])||!isset($_POST["name"])){
+        if(!isset($_POST["category_id"])||!isset($_POST["category_name"])){
 
             //process a request with get method
             $data["host_url"]=$this->host_url;
@@ -155,13 +155,13 @@ class Category extends CI_Controller{
         }else{
             //process a request with post method
 
-            $id=$_POST["id"];
-            $name=$_POST["name"];
+            $id=$_POST["category_id"];
+            $name=$_POST["category_name"];
             $ret=$this->categorymodel->modify($id,$name);
             if($ret){
-                echo "succeed";
+                echo "success";
             }else{
-                echo "false";
+                echo "fail";
             }
         }
     }

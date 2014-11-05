@@ -5,12 +5,12 @@
 <!--datagrid的工具栏-->
 <div id="dgtoolbarCategory" >
     <a class=easyui-linkbutton id="lbtnCategoryAddRow" iconCls=icon-add >新增</a>
-    <a class=easyui-linkbutton id="lbtnCategoryUpdateRow" iconCls=icon-edit>编辑</a>
+    <a class=easyui-linkbutton id="lbtnCategoryModifyRow" iconCls=icon-edit>编辑</a>
     <a class=easyui-linkbutton id="lbtnCategoryRemoveRow" iconCls=icon-remove>删除</a>
 </div>
 
 
-<!--Add和Update操作的对话框-->
+<!--Add和modify操作的对话框-->
 <div id="dlgCRUD_Category" > </div>
 
 
@@ -29,13 +29,13 @@
     var DLG_CRUD_DOM_ID="dlgCRUD_Category",    //dialog
         DG_CRUD_DOM_ID="dgCategory",    //datagrid
         LBTN_ADDROW_DOM_ID="lbtnCategoryAddRow",    //linkbutton
-        LBTN_UPDATEROW_DOM_ID="lbtnCategoryUpdateRow",    //linkbutton
+        LBTN_MODIFYROW_DOM_ID="lbtnCategoryModifyRow",    //linkbutton
         LBTN_REMOVEROW_DOM_ID="lbtnCategoryRemoveRow";    //linkbutton
 
     //URL to CRUD
     var URL_TO_READ="<?php echo $host_url ?>/index.php/category/datagrid_json",   //url to retrieve data
         URL_TO_ADD= "<?php echo $host_url?>/index.php/category/add",     //url to add 
-        URL_TO_UPDATE="",    //url to update 
+        URL_TO_MODIFY="<?php echo $host_url?>/index.php/category/modify",    //url to modify 
         URL_TO_REMOVE="<?php echo $host_url?>/index.php/category/remove";    //url to remove 
         
     
@@ -88,20 +88,20 @@
     //绑定单击事件:add
     $("#"+LBTN_ADDROW_DOM_ID).click(
         function(){
-            showAddUpdateDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_ADD);
+            showAddMODIFYDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_ADD);
             //post
         }
     );
 
 
 
-    //绑定单击事件:update
-    $("#"+LBTN_UPDATEROW_DOM_ID).click(
+    //绑定单击事件:modify
+    $("#"+LBTN_MODIFYROW_DOM_ID).click(
         function(){
             //获取选择行
             var row=$("#"+DG_CRUD_DOM_ID).datagrid("getSelected");
             if(row!=null){
-                showAddUpdateDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_UPDATE,row);
+                showAddMODIFYDialog(oDgCrud,DLG_CRUD_DOM_ID,URL_TO_MODIFY,row);
             }else{
                 alert("必须先选择需要修改的行");
             }
@@ -149,9 +149,17 @@
         $.post(
             url,
             postdata,
-            function(){
-                //todo:校验是否是success
-                alert("数据保存成功");
+            function(data){
+                if(data=="success"){
+                    $.messager.show({
+                        title:"保存成功",
+                        msg:"记录已经保存成功:",
+                    });
+                    //刷新表格
+                    $("#"+DG_CRUD_DOM_ID).datagrid("reload");
+                }else{
+                    alert("当前操作未成功，请稍候再试");
+                }
             }
         );
         $("#"+DLG_CRUD_DOM_ID).dialog("close");
@@ -230,7 +238,7 @@
             if(dlgDOMNODE.length<=0){
                 alert("Error in "+arguments.callee+"\r\n cannot find the dialog" );
             }else{
-                var content="<form id='formAddUpdate'action='"
+                var content="<form id='formAddMODIFY'action='"
                     +actionurl+
                     "'method=post>";
                 content+=genereateFormFromFieldArray(fieldarray);
@@ -250,8 +258,8 @@
     //input:这里oDgCrud是JSON对象
     //input:dlgID是对话框的ID,之所以传递ID而非JSON对象, 是方便使用JQquery选择器
     //url:表单提交的地址
-    //input:如果传递了row,则为Update操作，否则为Add操作
-    function showAddUpdateDialog(oDgCrud,dlgID,url,row=null,href=null){
+    //input:如果传递了row则为modify操作，否则为Add操作
+    function showAddMODIFYDialog(oDgCrud,dlgID,url,row=null,href=null){
 
         var fieldarray=getFieldFromDgJson(oDgCrud),
             html=genereateFormFromFieldArray(fieldarray),
@@ -263,7 +271,7 @@
             if(row==null){    //Add操作
                 $("#"+dlgID+" form").form("clear");
                 dlgDOMNODE.dialog({title:"增加",iconCls:"icon-add"});
-            }else{    //Update操作
+            }else{    //modify操作
                 $("#"+dlgID+" form").form("load",row);
                 dlgDOMNODE.dialog({title:"修改",iconCls:"icon-edit"});
             }
@@ -282,6 +290,10 @@
 
 
 
+    //删除行
+    //row:行数据对象，json，格式类似于{field:value,field2:value2,...}
+    //idFieldName:ID字段名称，用于最后提示的消息对话框
+    //URL_TO_REMOVE:服务端处理remove操作的url
     function removeRow(row,idFieldName,URL_TO_REMOVE){
 
         if(row!=null){
