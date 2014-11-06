@@ -20,9 +20,9 @@ class Article extends CI_Controller{
 
     function add(){
 
-        if(!isset($_POST["articlecontent"]) || 
-            !isset($_POST["articletitle"])  ||
-            !isset($_POST["articlecat"])
+        if(!isset($_POST["article_content"]) || 
+            !isset($_POST["article_name"])  ||
+            !isset($_POST["article_cat"])
         ){
             $data["host_url"]=$this->host_url;
             $this->load->view(
@@ -31,9 +31,9 @@ class Article extends CI_Controller{
             );
 
         }else{
-            $content=$_POST["articlecontent"];
-            $title=$_POST["articletitle"];
-            $cat=$_POST["articlecat"];
+            $content=$_POST["article_content"]; 
+            $title=$_POST["article_name"];
+            $cat=$_POST["article_cat"];
             //$date=date();
             $author="1";
 
@@ -50,7 +50,7 @@ class Article extends CI_Controller{
 
     function remove(){
 
-        if(!isset($_POST["id"])){
+        if(!isset($_POST["article_id"])){
             $data["host_url"]=$this->host_url;
             $this->load->view(
                 "article/removeView",
@@ -58,9 +58,13 @@ class Article extends CI_Controller{
             );
 
         }else{
-            $id=$_POST["id"];
+            $id=$_POST["article_id"];
             $ret=$this->articlemodel->remove($id);
-            print_r($ret);
+            if($ret){
+                echo "success";
+            }else{
+                echo "fail";
+            }
         }
     }
 
@@ -109,9 +113,56 @@ class Article extends CI_Controller{
 
     }
 
+    function datagrid_json(){
+
+        if( !isset($_POST['page'])||
+            !isset($_POST['rows'])
+        ){
+            echo "parameters less:page ,rows must be provided";
+        }else{
+            $page=$_POST['page'];
+            $rows=$_POST['rows'];
+
+            $result=array();
+            $result['total']=$this->articlemodel->datagrid_total();
+            $query=$this->articlemodel->datagrid_rows($page,$rows);
+            $rows=array();
+            foreach($query->result() as $row){
+                $item=array();
+                $item["article_id"]=$row->article_id;
+                $item["article_name"]=$row->article_name;
+                $item["article_author"]=$row->article_author;
+                $item["article_date"]=$row->article_date;
+                array_push($rows,$item);
+            };
+            $result["rows"]=$rows;
+            echo json_encode($result);
+        }
+
+    }
 
 
-    //echo json for datagrid
+
+    function datagrid_show(){
+
+        if(!isset($_POST["rows"])||
+            !isset($_POST["page"])
+        ){
+            //process a get request
+            $content_array["host_url"]=$this->host_url;
+            $this->load->view(
+                "article/datagrid_showView",
+                $content_array
+            );
+        }else{
+            //process a post requset
+        }
+    }
+
+
+
+
+
     function listshow(){
 
         

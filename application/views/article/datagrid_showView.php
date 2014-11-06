@@ -9,8 +9,10 @@
 
 <!--datagrid的工具栏-->
 <div id="dgtoolbarArticle" >
+   <!-- 此处不予放置此按钮
     <a class=easyui-linkbutton id="lbtnArticleAddRow" iconCls=icon-add >新增</a>
     <a class=easyui-linkbutton id="lbtnArticleModifyRow" iconCls=icon-edit>编辑</a>
+    -->
     <a class=easyui-linkbutton id="lbtnArticleRemoveRow" iconCls=icon-remove>删除</a>
 </div>
 
@@ -38,7 +40,7 @@
         LBTN_REMOVEROW_DOM_ID="lbtnArticleRemoveRow";    //linkbutton 删除一行
 
     //URL to CRUD
-    var URL_TO_READ="<?php echo $host_url ?>/index.php/article/listshow?catid=<?php echo $catid ?>",   //url to retrieve data
+    var URL_TO_READ="<?php echo $host_url ?>/index.php/article/datagrid_json",   //url to retrieve data
         URL_TO_ADD= "<?php echo $host_url?>/index.php/article/add",     //url to add 
         URL_TO_MODIFY="<?php echo $host_url?>/index.php/article/modify",    //url to modify 
         URL_TO_REMOVE="<?php echo $host_url?>/index.php/article/remove";    //url to remove 
@@ -56,9 +58,11 @@
         toolbar:"#dgtoolbarArticle",  //工具栏
         columns:[    //多行表头组成的数组
             [
-                {field:'article_id',title:'id'},
-                {field:'article_name',title:'栏目',editor:{type:'text'}},
-                {field:'article_cat',title:'pid',editor:{type:'text'}},
+                {field:'article_id',title:'文章id'},
+                {field:'article_name',title:'文章标题',editor:{type:'text'}},
+                {field:'article_author',title:'文章作者',editor:{type:'text'}},
+                {field:'article_cat',title:'文章类别',editor:{type:'text'}},
+                {field:'article_date',title:'发布日期',editor:{type:'text'}},
             ],
         ],
         idField:"article_id",    //id 字段

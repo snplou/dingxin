@@ -8,7 +8,7 @@
 
 
 <label for="id">输入ID </label>
-<input name="id"  type="text">
+<input name="article_id"  type="text">
 <input type="submit" value="提交">
 
 

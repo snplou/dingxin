@@ -15,12 +15,12 @@
 
     文章类别<input class="easyui-combotree" 
                     id="articlecategory" 
-                    name="articlecat" 
+                    name="article_cat" 
                     url="http://localhost/dingxindianqi/index.php/category/treenode" >
 
-    文章标题<input id="articletitle" name="articletitle" type="text">
+    文章标题<input id="articletitle" name="article_name" type="text">
 
-    <script id="ueditorcontainer" name="articlecontent" type="text/plain" ></script>
+    <script id="ueditorcontainer" name="article_content" type="text/plain" ></script>
 
     <input type="submit" value="提交">
 

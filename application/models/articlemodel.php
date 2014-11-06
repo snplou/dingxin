@@ -77,11 +77,26 @@ class ArticleModel extends CI_Model{
 
 
 
-    function datagrid_total($catid=1){
+    function datagrid_rows($page='',$rows=''){
+
+        if(($page!='') && ($rows!='')){
+            $offset=($page-1)*$rows;
+            $this->db->limit($rows,$offset); 
+        }
+        $this->db
+            ->select("*") 
+            ->from($this->table);
+        return  $this->db->get();
+
+    }
+
+
+
+
+    function datagrid_total(){
         $this->db
             -> select("count(*) as count")
-            ->from($this->table)
-            ->where("article_cat",$catid);
+            ->from($this->table);
         $query=$this->db->get()->result();
         return $query[0]->count;
     }

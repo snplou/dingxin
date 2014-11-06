@@ -85,7 +85,7 @@
         function(){
             $("#regCenter").panel({
                 'region':"center",
-                'href':"http://localhost/dingxindianqi/index.php/article/show?id=14"
+                'href':"http://localhost/dingxindianqi/index.php/article/datagrid_show"
             });
         }
     );
